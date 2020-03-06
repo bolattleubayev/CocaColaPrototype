@@ -158,7 +158,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let physicsBody = SCNPhysicsBody(type: .dynamic, shape: SCNPhysicsShape(node: canNode, options: [SCNPhysicsShape.Option.collisionMargin: 0.01]))
         canNode.physicsBody = physicsBody
         
-        let power = Float(10.0)
+        let power = Float(5.0)
         let force = SCNVector3(-cameraTransform.m32 * power, -cameraTransform.m32 * power, -cameraTransform.m33 * power)
         
         canNode.physicsBody?.applyForce(force, asImpulse: true)

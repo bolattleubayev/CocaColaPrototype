@@ -12,23 +12,33 @@ import ARKit
 
 class ViewController: UIViewController, ARSCNViewDelegate {
     
-    var hoopAdded = false
+    var basketAdded = false
+    var lastItem = true
+    
     
     @IBOutlet weak var sceneView: ARSCNView!
     
     @IBAction func screenTapped(_ sender: UITapGestureRecognizer) {
-        if !hoopAdded {
+        if !basketAdded {
             let touchLocation = sender.location(in: sceneView)
             let hitTestResult = sceneView.hitTest(touchLocation, types: [.existingPlaneUsingExtent])
             
             if let result = hitTestResult.first {
                 //addHoop(result: result)
+                
                 addTinCanHolder(result: result)
-                hoopAdded = true
+                basketAdded = true
+                    
             }
         } else {
             //createBasketball()
-            createTinCan()
+            if lastItem {
+                createTinCan()
+                lastItem = false
+            } else {
+                createBottle()
+                lastItem = true
+            }
         }
         
     }
@@ -68,7 +78,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         tinCanHolderNode.position = SCNVector3(planePosition.x, planePosition.y, planePosition.z)
         
         // Adding physics with special options to acknowledge the custom shape
-        tinCanHolderNode.physicsBody = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(node: tinCanHolderNode, options: [SCNPhysicsShape.Option.type: SCNPhysicsShape.ShapeType.concavePolyhedron]))
+        tinCanHolderNode.physicsBody = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(node: tinCanHolderNode, options: [SCNPhysicsShape.Option.type: SCNPhysicsShape.ShapeType.concavePolyhedron, SCNPhysicsShape.Option.collisionMargin: 0.01]))
         
         // Add the node to the scene
         sceneView.scene.rootNode.addChildNode(tinCanHolderNode)
@@ -84,8 +94,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         node.eulerAngles.x = -.pi / 2
         
-        if hoopAdded {
-            node.opacity = 0.0
+        if basketAdded {
+            node.opacity = 0.5
         } else {
             node.opacity = 0.5
         }
@@ -103,8 +113,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         node.eulerAngles.x = -.pi / 2
         
-        if hoopAdded {
-            node.opacity = 0.0
+        if basketAdded {
+            node.opacity = 0.5
         } else {
             node.opacity = 0.5
         }
@@ -112,30 +122,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         return node
     }
     
-    // Create basketball
-    func createBasketball() {
-        guard let currentFrame = sceneView.session.currentFrame else {
-            return
-        }
-        
-        let ball = SCNNode(geometry: SCNSphere(radius: 0.25))
-        ball.geometry?.firstMaterial?.diffuse.contents = UIColor.orange
-        //ball.scale = SCNVector3(0.05, 0.05, 0.05)
-        
-        // Take position of the camera and use it for ball location
-        let cameraTransform = SCNMatrix4(currentFrame.camera.transform)
-        ball.transform = cameraTransform
-        
-        // Adding physics, collision margin setes the interaction distance
-        let physicsBody = SCNPhysicsBody(type: .dynamic, shape: SCNPhysicsShape(node: ball, options: [SCNPhysicsShape.Option.collisionMargin: 0.01]))
-        ball.physicsBody = physicsBody
-        
-        let power = Float(10.0)
-        let force = SCNVector3(-cameraTransform.m32 * power, -cameraTransform.m32 * power, -cameraTransform.m33 * power)
-        
-        ball.physicsBody?.applyForce(force, asImpulse: true)
-        sceneView.scene.rootNode.addChildNode(ball)
-    }
     
     // Create tin can
     
@@ -143,6 +129,34 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let canScene = SCNScene(named: "art.scnassets/tinCan.scn")
         
         guard let canNode = canScene?.rootNode.childNode(withName: "Can", recursively: false) else {
+            return
+        }
+        
+        guard let currentFrame = sceneView.session.currentFrame else {
+            return
+        }
+        
+        // Take position of the camera and use it for ball location
+        let cameraTransform = SCNMatrix4(currentFrame.camera.transform)
+        canNode.transform = cameraTransform
+        
+        // Adding physics, collision margin setes the interaction distance
+        let physicsBody = SCNPhysicsBody(type: .dynamic, shape: SCNPhysicsShape(node: canNode, options: [SCNPhysicsShape.Option.collisionMargin: 0.01]))
+        canNode.physicsBody = physicsBody
+        
+        let power = Float(5.0)
+        let force = SCNVector3(-cameraTransform.m32 * power, -cameraTransform.m32 * power, -cameraTransform.m33 * power)
+        
+        canNode.physicsBody?.applyForce(force, asImpulse: true)
+        sceneView.scene.rootNode.addChildNode(canNode)
+    }
+    
+    // Create bottle
+    
+    func createBottle() {
+        let canScene = SCNScene(named: "art.scnassets/bottle.scn")
+        
+        guard let canNode = canScene?.rootNode.childNode(withName: "Bottle", recursively: false) else {
             return
         }
         

@@ -12,9 +12,8 @@ import ARKit
 
 class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDelegate {
     
-    var basketAdded = false
-    var isCan = true
-    
+    private var isCan = true
+    private var score = 0
     
     @IBOutlet weak var scoreLabel: UILabel!
     
@@ -35,29 +34,18 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
     @IBOutlet weak var sceneView: ARSCNView!
     
     @IBAction func screenTapped(_ sender: UITapGestureRecognizer) {
-        if !basketAdded {
-            let touchLocation = sender.location(in: sceneView)
-            let hitTestResult = sceneView.hitTest(touchLocation, types: [.existingPlaneUsingExtent])
-            
-            if let result = hitTestResult.first {
-                addTinCanHolder(result: result)
-                basketAdded = true
-                    
-            }
+        
+        if isCan {
+            createThrownObject(objectName: "can")
         } else {
-            //createBasketball()
-            if isCan {
-                createTinCan()
-            } else {
-                createBottle()
-            }
+            createThrownObject(objectName: "bottle")
         }
         
     }
     
     // MARK: - Force Direction
     
-    func getUserVector() -> (SCNVector3, SCNVector3) { // (direction, position)
+    private func getUserVector() -> (SCNVector3, SCNVector3) { // (direction, position)
         if let frame = self.sceneView.session.currentFrame {
             let mat = SCNMatrix4(frame.camera.transform) // 4x4 transform matrix describing camera in world space
             let dir = SCNVector3(-1 * mat.m31, -1 * mat.m32, -1 * mat.m33) // orientation of camera in world space
@@ -68,143 +56,110 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         return (SCNVector3(0, 0, -1), SCNVector3(0, 0, -0.2))
     }
     
+    //create random float between specified ranges
+    private func randomFloat(min: Float, max: Float) -> Float {
+        return Float.random(in: min...max)
+    }
+    
     // MARK: - Creating Objects
     
-    // Adding tin can holder
-    func addTinCanHolder(result: ARHitTestResult) {
-        // Retrieve the scene file and locate the Hoop node
-        let tinCanHolderScene = SCNScene(named: "art.scnassets/tinCanHolder.scn")
+    private func addBins() {
         
-        guard let tinCanHolderNode = tinCanHolderScene?.rootNode.childNode(withName: "TinCan", recursively: false) else {
-            return
+        for _ in 0..<30 {
+            
+            // Generate random bin type
+            let randomBinIndex = Bool.random()
+            var holedrName = ""
+            var nodeName = ""
+            if randomBinIndex {
+                holedrName = "art.scnassets/tinCanHolder.scn"
+                nodeName = "canBasket"
+            } else {
+                holedrName = "art.scnassets/bottleHolder.scn"
+                nodeName = "bottleBasket"
+            }
+            
+            let tinCanHolderScene = SCNScene(named: holedrName)
+            
+            if let node = tinCanHolderScene?.rootNode.childNode(withName: "Bin", recursively: false) {
+                // Locate bins at random positions
+                node.position = SCNVector3(randomFloat(min: -10, max: 10), randomFloat(min: -4, max: 5), randomFloat(min: -10, max: 10))
+                
+                node.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
+                node.physicsBody?.isAffectedByGravity = false
+                
+                // Add animation
+                
+                let rotationAction : SCNAction = SCNAction.rotate(by: .pi, around: SCNVector3(0, 1, 0), duration: 2.0)
+                
+                let scaleUpAction: SCNAction = SCNAction.scale(to: 1.2, duration: 1.0)
+                let scaleDownAction: SCNAction = SCNAction.scale(by: 1.2, duration: 1.0)
+                
+                let actionSequence = SCNAction.sequence([scaleUpAction, scaleDownAction])
+                let groupedAction = SCNAction.group([rotationAction, actionSequence])
+                
+                let repeatedGroupAction = SCNAction.repeatForever(groupedAction)
+                
+                node.runAction(repeatedGroupAction)
+                
+                // Collision
+                node.physicsBody?.categoryBitMask = CollisionCategory.targetCategory.rawValue
+                node.physicsBody?.contactTestBitMask = CollisionCategory.missileCategory.rawValue
+                
+                node.name = nodeName
+                
+                sceneView.scene.rootNode.addChildNode(node)
+            }
         }
-        
-        // Place the node in the correct position
-        let planePosition = result.worldTransform.columns.3
-        tinCanHolderNode.position = SCNVector3(planePosition.x, planePosition.y, planePosition.z)
-        
-        tinCanHolderNode.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
-        tinCanHolderNode.physicsBody?.isAffectedByGravity = false
-        
-        tinCanHolderNode.physicsBody?.categoryBitMask = CollisionCategory.targetCategory.rawValue
-        tinCanHolderNode.physicsBody?.contactTestBitMask = CollisionCategory.missileCategory.rawValue
-        
-        // Add the node to the scene
-        sceneView.scene.rootNode.addChildNode(tinCanHolderNode)
     }
-    
-    // Create vertical areas
-    func createVerticalArea(planeAnchor: ARPlaneAnchor) -> SCNNode {
-        let node = SCNNode()
-        
-        let geometry = SCNPlane(width: CGFloat(planeAnchor.extent.x), height: CGFloat(planeAnchor.extent.z))
-        geometry.firstMaterial?.diffuse.contents = UIColor.green
-        node.geometry = geometry
-        
-        node.eulerAngles.x = -.pi / 2
-        
-        if basketAdded {
-            node.opacity = 0.0
-        } else {
-            node.opacity = 0.5
-        }
-        
-        return node
-    }
-    
-    // Create horizontal areas
-    func createHorizontalArea(planeAnchor: ARPlaneAnchor) -> SCNNode {
-        let node = SCNNode()
-        
-        let geometry = SCNPlane(width: CGFloat(planeAnchor.extent.x), height: CGFloat(planeAnchor.extent.z))
-        geometry.firstMaterial?.diffuse.contents = UIColor.green
-        node.geometry = geometry
-        
-        node.eulerAngles.x = -.pi / 2
-        
-        if basketAdded {
-            node.opacity = 0.0
-        } else {
-            node.opacity = 0.5
-        }
-        
-        return node
-    }
-    
     
     // Create tin can
     
-    func createTinCan() {
-        let canScene = SCNScene(named: "art.scnassets/tinCan.scn")
+    private func createThrownObject(objectName: String) {
         
-        guard let canNode = canScene?.rootNode.childNode(withName: "Can", recursively: false) else {
+        var scnFileName = ""
+        var sceneGraphName = ""
+        var torque = 0.0
+        
+        if objectName == "can" {
+            scnFileName = "art.scnassets/tinCan.scn"
+            sceneGraphName = "Can"
+            torque = 0.01
+        } else {
+            scnFileName = "art.scnassets/bottle.scn"
+            sceneGraphName = "Bottle"
+            torque = 0.03
+        }
+        
+        let objectScene = SCNScene(named: scnFileName)
+        
+        guard let objectNode = objectScene?.rootNode.childNode(withName: sceneGraphName, recursively: false) else {
             return
         }
         
-        guard let currentFrame = sceneView.session.currentFrame else {
-            return
-        }
+        // Creat Physics Body
+        objectNode.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
+        objectNode.physicsBody?.isAffectedByGravity = false
         
-        // Take position of the camera and use it for ball location
-        let cameraTransform = SCNMatrix4(currentFrame.camera.transform)
-        canNode.transform = cameraTransform
+        // Collision properties
+        objectNode.physicsBody?.categoryBitMask = CollisionCategory.missileCategory.rawValue
+        objectNode.physicsBody?.collisionBitMask = CollisionCategory.targetCategory.rawValue
         
-        // Adding physics, collision margin setes the interaction distance
-        //let physicsBody = SCNPhysicsBody(type: .dynamic, shape: SCNPhysicsShape(node: canNode, options: [SCNPhysicsShape.Option.collisionMargin: 0.01]))
-        //canNode.physicsBody = physicsBody
-        
-        //canNode.physicsBody?.categoryBitMask = CollisionCategory.flier.rawValue
-        
-        canNode.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
-        canNode.physicsBody?.isAffectedByGravity = false
-        
-        canNode.physicsBody?.categoryBitMask = CollisionCategory.missileCategory.rawValue
-        canNode.physicsBody?.collisionBitMask = CollisionCategory.targetCategory.rawValue
-        //canNode.physicsBody?.contactTestBitMask = BodyType.flier.rawValue
-        
+        // Force application direction and position
         let (direction, position) = self.getUserVector()
         
-        canNode.position = position
-        //let force = SCNVector3(-cameraTransform.m32 * power, -cameraTransform.m32 * power, -cameraTransform.m33 * power)
+        objectNode.name = objectName
+        
+        objectNode.position = position
+        
+        // Forc application
         let force = SCNVector3(direction.x*4,direction.y*4,direction.z*4)
-        canNode.physicsBody?.applyForce(force, asImpulse: true)
-        sceneView.scene.rootNode.addChildNode(canNode)
+        objectNode.physicsBody?.applyForce(force, asImpulse: true)
+        objectNode.physicsBody?.applyTorque(SCNVector4(1, 1, 1, torque), asImpulse: true)
+        
+        
+        sceneView.scene.rootNode.addChildNode(objectNode)
     }
-    
-    // Create bottle
-    
-    func createBottle() {
-        let canScene = SCNScene(named: "art.scnassets/bottle.scn")
-        
-        guard let canNode = canScene?.rootNode.childNode(withName: "Bottle", recursively: false) else {
-            return
-        }
-        
-        guard let currentFrame = sceneView.session.currentFrame else {
-            return
-        }
-        
-        // Take position of the camera and use it for ball location
-        let cameraTransform = SCNMatrix4(currentFrame.camera.transform)
-        canNode.transform = cameraTransform
-        
-        // Adding physics, collision margin setes the interaction distance
-        let physicsBody = SCNPhysicsBody(type: .dynamic, shape: SCNPhysicsShape(node: canNode, options: [SCNPhysicsShape.Option.collisionMargin: 0.01]))
-        canNode.physicsBody = physicsBody
-        
-        //canNode.physicsBody?.categoryBitMask = BodyType.flier.rawValue
-        //canNode.physicsBody?.contactTestBitMask = BodyType.flier.rawValue
-        
-        let (direction, position) = self.getUserVector()
-        
-        canNode.position = position
-        //let force = SCNVector3(-cameraTransform.m32 * power, -cameraTransform.m32 * power, -cameraTransform.m33 * power)
-        let force = SCNVector3(direction.x*4,direction.y*4,direction.z*4)
-        canNode.physicsBody?.applyForce(force, asImpulse: true)
-        
-        sceneView.scene.rootNode.addChildNode(canNode)
-    }
-    
     
     // MARK: - Lifecycle
     
@@ -216,17 +171,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         
         self.sceneView.scene.physicsWorld.contactDelegate = self
         
-        // Show statistics such as fps and timing information
-        //sceneView.showsStatistics = true
-        
-//        // Create a new scene
-//        let scene = SCNScene(named: "art.scnassets/hop.scn")!
-//
-//        // Set the scene to the view
-//        sceneView.scene = scene
-        
-        // Show the world origin
-        //sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints, ARSCNDebugOptions.showWorldOrigin]
+        addBins()
         
         // enable lighting
         sceneView.autoenablesDefaultLighting = true
@@ -237,7 +182,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         
         // Create a session configuration
         let configuration = ARWorldTrackingConfiguration()
-        configuration.planeDetection = .horizontal
+        //configuration.planeDetection = .horizontal
         
         // Run the view's session
         sceneView.session.run(configuration)
@@ -251,36 +196,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
     }
 
     // MARK: - ARSCNViewDelegate
-    
-    // Adding new planes
-    func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
-        guard let planeAnchor = anchor as? ARPlaneAnchor else {
-            return
-        }
-        
-        if planeAnchor.alignment == .vertical {
-            //let verticalPlane = createVerticalArea(planeAnchor: planeAnchor)
-            //node.addChildNode(verticalPlane)
-        } else {
-            let horizontalPlane = createHorizontalArea(planeAnchor: planeAnchor)
-            node.addChildNode(horizontalPlane)
-        }
-    }
-    
-     // Merging planes that are close to each other
-    func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
-        guard let planeAnchor = anchor as? ARPlaneAnchor else {
-            return
-        }
-        
-        for node in node.childNodes {
-            node.position = SCNVector3(planeAnchor.center.x, 0, planeAnchor.center.z)
-            if let plane = node.geometry as? SCNPlane {
-                plane.width = CGFloat(planeAnchor.extent.x)
-                plane.height = CGFloat(planeAnchor.extent.z)
-            }
-        }
-    }
     
     func session(_ session: ARSession, didFailWithError error: Error) {
         // Present an error message to the user
@@ -301,20 +216,25 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
     
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
         
-        
-        print("Collision")
-        //print("** Collision!! " + contact.nodeA.name! + " hit " + contact.nodeB.name!)
-        
         if contact.nodeA.physicsBody?.categoryBitMask == CollisionCategory.targetCategory.rawValue
             || contact.nodeB.physicsBody?.categoryBitMask == CollisionCategory.targetCategory.rawValue {
-            
-            basketAdded = false
             
             DispatchQueue.main.async {
                 contact.nodeA.removeFromParentNode()
                 contact.nodeB.removeFromParentNode()
-                self.scoreLabel.text = String("Collision!")
+                
+                if ((contact.nodeA.name! == "canBasket" && contact.nodeB.name! == "can") || (contact.nodeA.name! == "can" && contact.nodeB.name! == "canBasket")) {
+                    self.score += 10
+                    self.scoreLabel.text = String("Счёт: \(self.score)")
+                } else if ((contact.nodeA.name! == "bottleBasket" && contact.nodeB.name! == "bottle") || (contact.nodeA.name! == "bottle" && contact.nodeB.name! == "bottleBasket")) {
+                    self.score += 10
+                    self.scoreLabel.text = String("Счёт: \(self.score)")
+                } else {
+                    self.scoreLabel.text = String("Счёт: \(self.score)")
+                }
+                
             }
+            
             
             let  explosion = SCNParticleSystem(named: "Explode", inDirectory: nil)
             contact.nodeB.addParticleSystem(explosion!)

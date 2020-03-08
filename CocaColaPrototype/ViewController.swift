@@ -45,24 +45,23 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
     
     // MARK: - Force Direction
     
-    private func getUserVector() -> (SCNVector3, SCNVector3) { // (direction, position)
-        if let frame = self.sceneView.session.currentFrame {
-            let mat = SCNMatrix4(frame.camera.transform) // 4x4 transform matrix describing camera in world space
-            let dir = SCNVector3(-1 * mat.m31, -1 * mat.m32, -1 * mat.m33) // orientation of camera in world space
-            let pos = SCNVector3(mat.m41, mat.m42, mat.m43) // location of camera in world space
+    private func getCameraTransformationVectors() -> (SCNVector3, SCNVector3) {
+        
+        if let currentFrame = self.sceneView.session.currentFrame {
             
-            return (dir, pos)
+            let cameraInTheWorldMatrix = SCNMatrix4(currentFrame.camera.transform)
+            let cameraOrientation = SCNVector3(-1 * cameraInTheWorldMatrix.m31, -1 * cameraInTheWorldMatrix.m32, -1 * cameraInTheWorldMatrix.m33)
+            let cameraPosition = SCNVector3(cameraInTheWorldMatrix.m41, cameraInTheWorldMatrix.m42, cameraInTheWorldMatrix.m43)
+            
+            return (cameraOrientation, cameraPosition)
         }
-        return (SCNVector3(0, 0, -1), SCNVector3(0, 0, -0.2))
-    }
-    
-    //create random float between specified ranges
-    private func randomFloat(min: Float, max: Float) -> Float {
-        return Float.random(in: min...max)
+        
+        return (SCNVector3(0, -1, 0), SCNVector3(0, 0, -0.5))
     }
     
     // MARK: - Creating Objects
     
+    // Catching Bins
     private func addBins() {
         
         for _ in 0..<30 {
@@ -82,8 +81,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
             let tinCanHolderScene = SCNScene(named: holedrName)
             
             if let node = tinCanHolderScene?.rootNode.childNode(withName: "Bin", recursively: false) {
+                
                 // Locate bins at random positions
-                node.position = SCNVector3(randomFloat(min: -10, max: 10), randomFloat(min: -4, max: 5), randomFloat(min: -10, max: 10))
+                
+                node.position = SCNVector3(Float.random(in: -8...9), Float.random(in: -3...6), Float.random(in: -9...8))
                 
                 node.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
                 node.physicsBody?.isAffectedByGravity = false
@@ -103,8 +104,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
                 node.runAction(repeatedGroupAction)
                 
                 // Collision
-                node.physicsBody?.categoryBitMask = CollisionCategory.targetCategory.rawValue
-                node.physicsBody?.contactTestBitMask = CollisionCategory.missileCategory.rawValue
+                node.physicsBody?.categoryBitMask = CollidingObjectType.catchingObject.rawValue
+                node.physicsBody?.contactTestBitMask = CollidingObjectType.thrownObject.rawValue
                 
                 node.name = nodeName
                 
@@ -113,8 +114,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         }
     }
     
-    // Create tin can
-    
+    // Thrown cans or bottles
     private func createThrownObject(objectName: String) {
         
         var scnFileName = ""
@@ -142,17 +142,17 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         objectNode.physicsBody?.isAffectedByGravity = false
         
         // Collision properties
-        objectNode.physicsBody?.categoryBitMask = CollisionCategory.missileCategory.rawValue
-        objectNode.physicsBody?.collisionBitMask = CollisionCategory.targetCategory.rawValue
+        objectNode.physicsBody?.categoryBitMask = CollidingObjectType.thrownObject.rawValue
+        objectNode.physicsBody?.collisionBitMask = CollidingObjectType.catchingObject.rawValue
         
         // Force application direction and position
-        let (direction, position) = self.getUserVector()
+        let (direction, position) = self.getCameraTransformationVectors()
         
         objectNode.name = objectName
         
         objectNode.position = position
         
-        // Forc application
+        // Force application
         let force = SCNVector3(direction.x*4,direction.y*4,direction.z*4)
         objectNode.physicsBody?.applyForce(force, asImpulse: true)
         objectNode.physicsBody?.applyTorque(SCNVector4(1, 1, 1, torque), asImpulse: true)
@@ -173,7 +173,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         
         addBins()
         
-        // enable lighting
+        // Enable default lighting
         sceneView.autoenablesDefaultLighting = true
     }
     
@@ -182,9 +182,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         
         // Create a session configuration
         let configuration = ARWorldTrackingConfiguration()
-        //configuration.planeDetection = .horizontal
-        
-        // Run the view's session
         sceneView.session.run(configuration)
     }
     
@@ -212,17 +209,19 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         
     }
     
-    // MARK: - Collision
+    // MARK: - Collision handling
     
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
         
-        if contact.nodeA.physicsBody?.categoryBitMask == CollisionCategory.targetCategory.rawValue
-            || contact.nodeB.physicsBody?.categoryBitMask == CollisionCategory.targetCategory.rawValue {
+        if contact.nodeA.physicsBody?.categoryBitMask == CollidingObjectType.catchingObject.rawValue
+            || contact.nodeB.physicsBody?.categoryBitMask == CollidingObjectType.catchingObject.rawValue {
             
+            // Dispatching to main queue asynchronously
             DispatchQueue.main.async {
                 contact.nodeA.removeFromParentNode()
                 contact.nodeB.removeFromParentNode()
                 
+                // Score counting logic
                 if ((contact.nodeA.name! == "canBasket" && contact.nodeB.name! == "can") || (contact.nodeA.name! == "can" && contact.nodeB.name! == "canBasket")) {
                     self.score += 10
                     self.scoreLabel.text = String("Счёт: \(self.score)")
@@ -235,6 +234,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
                 
             }
             
+            // Crash animation
             let  crash = SCNParticleSystem(named: "Crash", inDirectory: nil)
             contact.nodeB.addParticleSystem(crash!)
         }
@@ -242,9 +242,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
     
 }
 
-struct CollisionCategory: OptionSet {
+struct CollidingObjectType: OptionSet {
+    
     let rawValue: Int
     
-    static let missileCategory  = CollisionCategory(rawValue: 1 << 0)
-    static let targetCategory = CollisionCategory(rawValue: 1 << 1)
+    static let thrownObject  = CollidingObjectType(rawValue: 1 << 0)
+    static let catchingObject = CollidingObjectType(rawValue: 1 << 1)
+    
 }

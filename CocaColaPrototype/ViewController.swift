@@ -30,6 +30,20 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         }
     }
     
+    @IBAction func restartButtonPressed(_ sender: UIButton) {
+        
+        // Remove all previously added nodes
+        for childNode in sceneView.scene.rootNode.childNodes {
+            childNode.removeFromParentNode()
+        }
+        
+        // Add bins
+        addBins()
+        
+        score = 0
+        
+        scoreLabel.text = "Счёт: \(self.score)"
+    }
     
     @IBOutlet weak var sceneView: ARSCNView!
     
@@ -226,12 +240,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
                 // Score counting logic
                 if ((contact.nodeA.name! == "canBasket" && contact.nodeB.name! == "can") || (contact.nodeA.name! == "can" && contact.nodeB.name! == "canBasket")) {
                     self.score += 10
-                    self.scoreLabel.text = String("Счёт: \(self.score)")
+                    self.scoreLabel.text = "Счёт: \(self.score)"
                 } else if ((contact.nodeA.name! == "bottleBasket" && contact.nodeB.name! == "bottle") || (contact.nodeA.name! == "bottle" && contact.nodeB.name! == "bottleBasket")) {
                     self.score += 10
-                    self.scoreLabel.text = String("Счёт: \(self.score)")
+                    self.scoreLabel.text = "Счёт: \(self.score)"
                 } else {
-                    self.scoreLabel.text = String("Счёт: \(self.score)")
+                    self.scoreLabel.text = "Счёт: \(self.score)"
                 }
                 
             }

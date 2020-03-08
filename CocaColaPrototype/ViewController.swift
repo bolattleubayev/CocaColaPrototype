@@ -93,8 +93,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
                 
                 let rotationAction : SCNAction = SCNAction.rotate(by: .pi, around: SCNVector3(0, 1, 0), duration: 2.0)
                 
-                let scaleUpAction: SCNAction = SCNAction.scale(to: 1.2, duration: 1.0)
-                let scaleDownAction: SCNAction = SCNAction.scale(by: 1.2, duration: 1.0)
+                let scaleUpAction: SCNAction = SCNAction.scale(to: 1.1, duration: 1.0)
+                let scaleDownAction: SCNAction = SCNAction.scale(by: 1.1, duration: 1.0)
                 
                 let actionSequence = SCNAction.sequence([scaleUpAction, scaleDownAction])
                 let groupedAction = SCNAction.group([rotationAction, actionSequence])
@@ -103,7 +103,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
                 
                 node.runAction(repeatedGroupAction)
                 
-                // Collision
+                // Collision properties
                 node.physicsBody?.categoryBitMask = CollidingObjectType.catchingObject.rawValue
                 node.physicsBody?.contactTestBitMask = CollidingObjectType.thrownObject.rawValue
                 
@@ -155,7 +155,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         // Force application
         let force = SCNVector3(direction.x*4,direction.y*4,direction.z*4)
         objectNode.physicsBody?.applyForce(force, asImpulse: true)
-        objectNode.physicsBody?.applyTorque(SCNVector4(1, 1, 1, torque), asImpulse: true)
+        
+        // Apply random torque
+        objectNode.physicsBody?.applyTorque(SCNVector4(Double.random(in: 0...1), Double.random(in: 0...1), Double.random(in: 0...1), torque), asImpulse: true)
         
         
         sceneView.scene.rootNode.addChildNode(objectNode)

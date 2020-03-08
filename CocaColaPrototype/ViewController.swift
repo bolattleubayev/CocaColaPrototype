@@ -40,8 +40,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
             let hitTestResult = sceneView.hitTest(touchLocation, types: [.existingPlaneUsingExtent])
             
             if let result = hitTestResult.first {
-                //addHoop(result: result)
-                
                 addTinCanHolder(result: result)
                 basketAdded = true
                     
@@ -57,27 +55,20 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         
     }
     
+    // MARK: - Force Direction
     
-    // Adding hoop
-    func addHoop(result: ARHitTestResult) {
-        // Retrieve the scene file and locate the Hoop node
-        let hoopScene = SCNScene(named: "art.scnassets/hop.scn")
-        
-        guard let hoopNode = hoopScene?.rootNode.childNode(withName: "Hop", recursively: false) else {
-            return
+    func getUserVector() -> (SCNVector3, SCNVector3) { // (direction, position)
+        if let frame = self.sceneView.session.currentFrame {
+            let mat = SCNMatrix4(frame.camera.transform) // 4x4 transform matrix describing camera in world space
+            let dir = SCNVector3(-1 * mat.m31, -1 * mat.m32, -1 * mat.m33) // orientation of camera in world space
+            let pos = SCNVector3(mat.m41, mat.m42, mat.m43) // location of camera in world space
+            
+            return (dir, pos)
         }
-        
-        // Place the node in the correct position
-        let planePosition = result.worldTransform.columns.3
-        hoopNode.position = SCNVector3(planePosition.x, planePosition.y, planePosition.z)
-        
-        // Adding physics with special options to acknowledge the custom shape
-        hoopNode.physicsBody = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(node: hoopNode, options: [SCNPhysicsShape.Option.type: SCNPhysicsShape.ShapeType.concavePolyhedron]))
-        
-        //hoopNode.physicsBody?.categoryBitMask = CollisionCategory.holder.rawValue
-        // Add the node to the scene
-        sceneView.scene.rootNode.addChildNode(hoopNode)
+        return (SCNVector3(0, 0, -1), SCNVector3(0, 0, -0.2))
     }
+    
+    // MARK: - Creating Objects
     
     // Adding tin can holder
     func addTinCanHolder(result: ARHitTestResult) {
@@ -91,12 +82,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         // Place the node in the correct position
         let planePosition = result.worldTransform.columns.3
         tinCanHolderNode.position = SCNVector3(planePosition.x, planePosition.y, planePosition.z)
-        
-        // Adding physics with special options to acknowledge the custom shape
-        //tinCanHolderNode.physicsBody = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(node: tinCanHolderNode, options: [SCNPhysicsShape.Option.type: SCNPhysicsShape.ShapeType.concavePolyhedron, SCNPhysicsShape.Option.collisionMargin: 0.01]))
-        
-        //tinCanHolderNode.physicsBody?.categoryBitMask = CollisionCategory.holder.rawValue
-        
         
         tinCanHolderNode.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
         tinCanHolderNode.physicsBody?.isAffectedByGravity = false
@@ -177,9 +162,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         canNode.physicsBody?.collisionBitMask = CollisionCategory.targetCategory.rawValue
         //canNode.physicsBody?.contactTestBitMask = BodyType.flier.rawValue
         
-        let power = Float(5.0)
-        let force = SCNVector3(-cameraTransform.m32 * power, -cameraTransform.m32 * power, -cameraTransform.m33 * power)
+        let (direction, position) = self.getUserVector()
         
+        canNode.position = position
+        //let force = SCNVector3(-cameraTransform.m32 * power, -cameraTransform.m32 * power, -cameraTransform.m33 * power)
+        let force = SCNVector3(direction.x*4,direction.y*4,direction.z*4)
         canNode.physicsBody?.applyForce(force, asImpulse: true)
         sceneView.scene.rootNode.addChildNode(canNode)
     }
@@ -208,12 +195,18 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         //canNode.physicsBody?.categoryBitMask = BodyType.flier.rawValue
         //canNode.physicsBody?.contactTestBitMask = BodyType.flier.rawValue
         
-        let power = Float(5.0)
-        let force = SCNVector3(-cameraTransform.m32 * power, -cameraTransform.m32 * power, -cameraTransform.m33 * power)
+        let (direction, position) = self.getUserVector()
         
+        canNode.position = position
+        //let force = SCNVector3(-cameraTransform.m32 * power, -cameraTransform.m32 * power, -cameraTransform.m33 * power)
+        let force = SCNVector3(direction.x*4,direction.y*4,direction.z*4)
         canNode.physicsBody?.applyForce(force, asImpulse: true)
+        
         sceneView.scene.rootNode.addChildNode(canNode)
     }
+    
+    
+    // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -288,14 +281,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
             }
         }
     }
-/*
-    // Override to create and configure nodes for anchors added to the view's session.
-    func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
-        let node = SCNNode()
-     
-        return node
-    }
-*/
     
     func session(_ session: ARSession, didFailWithError error: Error) {
         // Present an error message to the user
@@ -312,7 +297,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         
     }
     
-    
+    // MARK: - Collision
     
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
         

@@ -22,18 +22,40 @@
                                     <outletCollection property="gestureRecognizers" destination="HC1-7f-UPF" appends="YES" id="Klq-FG-IHA"/>
                                 </connections>
                             </arscnView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tv7-Pw-TPE">
+                                <rect key="frame" x="179.5" y="788.5" width="55" height="26.5"/>
+                                <color key="backgroundColor" red="0.0" green="0.31954196099999999" blue="0.67289870979999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                <color key="textColor" red="1" green="0.80144375560000003" blue="0.0046433899549999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Jyg-FL-qvq">
+                                <rect key="frame" x="150.5" y="823" width="113" height="32"/>
+                                <segments>
+                                    <segment title="Can"/>
+                                    <segment title="Bottle"/>
+                                </segments>
+                                <connections>
+                                    <action selector="changeObjectMode:" destination="BV1-FR-VrT" eventType="valueChanged" id="EEb-ZW-xXM"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="leading" secondItem="fQZ-KI-GVf" secondAttribute="leading" id="GsS-dJ-CKf"/>
+                            <constraint firstItem="Jyg-FL-qvq" firstAttribute="centerX" secondItem="U0K-SW-4ec" secondAttribute="centerX" id="UA9-4n-qGb"/>
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="bottom" secondItem="fQZ-KI-GVf" secondAttribute="bottom" id="VpT-BR-CcM"/>
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="trailing" secondItem="fQZ-KI-GVf" secondAttribute="trailing" id="XyZ-9z-H8e"/>
+                            <constraint firstItem="Jyg-FL-qvq" firstAttribute="top" secondItem="Tv7-Pw-TPE" secondAttribute="bottom" constant="8" id="YTc-Uh-nfo"/>
+                            <constraint firstItem="Tv7-Pw-TPE" firstAttribute="centerX" secondItem="U0K-SW-4ec" secondAttribute="centerX" id="h9c-oo-D4B"/>
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="top" secondItem="U0K-SW-4ec" secondAttribute="top" id="rJc-2c-zQA"/>
+                            <constraint firstItem="fQZ-KI-GVf" firstAttribute="bottom" secondItem="Jyg-FL-qvq" secondAttribute="bottom" constant="8" id="y7c-LD-gOe"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="fQZ-KI-GVf"/>
                     </view>
                     <connections>
                         <outlet property="sceneView" destination="BrB-h1-WRS" id="F0c-P8-FGr"/>
+                        <outlet property="scoreLabel" destination="Tv7-Pw-TPE" id="ctI-cZ-YcK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>

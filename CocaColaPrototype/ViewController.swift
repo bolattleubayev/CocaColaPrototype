@@ -10,10 +10,26 @@ import UIKit
 import SceneKit
 import ARKit
 
-class ViewController: UIViewController, ARSCNViewDelegate {
+class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDelegate {
     
     var basketAdded = false
-    var lastItem = true
+    var isCan = true
+    
+    
+    @IBOutlet weak var scoreLabel: UILabel!
+    
+    @IBAction func changeObjectMode(_ sender: UISegmentedControl) {
+        DispatchQueue.main.async {
+          switch sender.selectedSegmentIndex {
+          case 0:
+            self.isCan = true
+          case 1:
+            self.isCan = false
+          default:
+              break
+          }
+        }
+    }
     
     
     @IBOutlet weak var sceneView: ARSCNView!
@@ -32,12 +48,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             }
         } else {
             //createBasketball()
-            if lastItem {
+            if isCan {
                 createTinCan()
-                lastItem = false
             } else {
                 createBottle()
-                lastItem = true
             }
         }
         
@@ -60,6 +74,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Adding physics with special options to acknowledge the custom shape
         hoopNode.physicsBody = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(node: hoopNode, options: [SCNPhysicsShape.Option.type: SCNPhysicsShape.ShapeType.concavePolyhedron]))
         
+        //hoopNode.physicsBody?.categoryBitMask = CollisionCategory.holder.rawValue
         // Add the node to the scene
         sceneView.scene.rootNode.addChildNode(hoopNode)
     }
@@ -78,7 +93,16 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         tinCanHolderNode.position = SCNVector3(planePosition.x, planePosition.y, planePosition.z)
         
         // Adding physics with special options to acknowledge the custom shape
-        tinCanHolderNode.physicsBody = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(node: tinCanHolderNode, options: [SCNPhysicsShape.Option.type: SCNPhysicsShape.ShapeType.concavePolyhedron, SCNPhysicsShape.Option.collisionMargin: 0.01]))
+        //tinCanHolderNode.physicsBody = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(node: tinCanHolderNode, options: [SCNPhysicsShape.Option.type: SCNPhysicsShape.ShapeType.concavePolyhedron, SCNPhysicsShape.Option.collisionMargin: 0.01]))
+        
+        //tinCanHolderNode.physicsBody?.categoryBitMask = CollisionCategory.holder.rawValue
+        
+        
+        tinCanHolderNode.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
+        tinCanHolderNode.physicsBody?.isAffectedByGravity = false
+        
+        tinCanHolderNode.physicsBody?.categoryBitMask = CollisionCategory.targetCategory.rawValue
+        tinCanHolderNode.physicsBody?.contactTestBitMask = CollisionCategory.missileCategory.rawValue
         
         // Add the node to the scene
         sceneView.scene.rootNode.addChildNode(tinCanHolderNode)
@@ -95,7 +119,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         node.eulerAngles.x = -.pi / 2
         
         if basketAdded {
-            node.opacity = 0.5
+            node.opacity = 0.0
         } else {
             node.opacity = 0.5
         }
@@ -114,7 +138,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         node.eulerAngles.x = -.pi / 2
         
         if basketAdded {
-            node.opacity = 0.5
+            node.opacity = 0.0
         } else {
             node.opacity = 0.5
         }
@@ -141,8 +165,17 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         canNode.transform = cameraTransform
         
         // Adding physics, collision margin setes the interaction distance
-        let physicsBody = SCNPhysicsBody(type: .dynamic, shape: SCNPhysicsShape(node: canNode, options: [SCNPhysicsShape.Option.collisionMargin: 0.01]))
-        canNode.physicsBody = physicsBody
+        //let physicsBody = SCNPhysicsBody(type: .dynamic, shape: SCNPhysicsShape(node: canNode, options: [SCNPhysicsShape.Option.collisionMargin: 0.01]))
+        //canNode.physicsBody = physicsBody
+        
+        //canNode.physicsBody?.categoryBitMask = CollisionCategory.flier.rawValue
+        
+        canNode.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
+        canNode.physicsBody?.isAffectedByGravity = false
+        
+        canNode.physicsBody?.categoryBitMask = CollisionCategory.missileCategory.rawValue
+        canNode.physicsBody?.collisionBitMask = CollisionCategory.targetCategory.rawValue
+        //canNode.physicsBody?.contactTestBitMask = BodyType.flier.rawValue
         
         let power = Float(5.0)
         let force = SCNVector3(-cameraTransform.m32 * power, -cameraTransform.m32 * power, -cameraTransform.m33 * power)
@@ -172,6 +205,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let physicsBody = SCNPhysicsBody(type: .dynamic, shape: SCNPhysicsShape(node: canNode, options: [SCNPhysicsShape.Option.collisionMargin: 0.01]))
         canNode.physicsBody = physicsBody
         
+        //canNode.physicsBody?.categoryBitMask = BodyType.flier.rawValue
+        //canNode.physicsBody?.contactTestBitMask = BodyType.flier.rawValue
+        
         let power = Float(5.0)
         let force = SCNVector3(-cameraTransform.m32 * power, -cameraTransform.m32 * power, -cameraTransform.m33 * power)
         
@@ -184,6 +220,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         // Set the view's delegate
         sceneView.delegate = self
+        
+        self.sceneView.scene.physicsWorld.contactDelegate = self
         
         // Show statistics such as fps and timing information
         //sceneView.showsStatistics = true
@@ -273,4 +311,37 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Reset tracking and/or remove existing anchors if consistent tracking is required
         
     }
+    
+    
+    
+    func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
+        
+        
+        print("Collision")
+        //print("** Collision!! " + contact.nodeA.name! + " hit " + contact.nodeB.name!)
+        
+        if contact.nodeA.physicsBody?.categoryBitMask == CollisionCategory.targetCategory.rawValue
+            || contact.nodeB.physicsBody?.categoryBitMask == CollisionCategory.targetCategory.rawValue {
+            
+            basketAdded = false
+            
+            DispatchQueue.main.async {
+                contact.nodeA.removeFromParentNode()
+                contact.nodeB.removeFromParentNode()
+                self.scoreLabel.text = String("Collision!")
+            }
+            
+            let  explosion = SCNParticleSystem(named: "Explode", inDirectory: nil)
+            contact.nodeB.addParticleSystem(explosion!)
+        }
+    }
+    
+}
+
+struct CollisionCategory: OptionSet {
+    let rawValue: Int
+    
+    static let missileCategory  = CollisionCategory(rawValue: 1 << 0)
+    static let targetCategory = CollisionCategory(rawValue: 1 << 1)
+    static let otherCategory = CollisionCategory(rawValue: 1 << 2)
 }

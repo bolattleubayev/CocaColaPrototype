@@ -13,8 +13,7 @@
 		FAB93C7C24121CB80081E8C2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAB93C7A24121CB80081E8C2 /* Main.storyboard */; };
 		FAB93C7E24121CBC0081E8C2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAB93C7D24121CBC0081E8C2 /* Assets.xcassets */; };
 		FAB93C8124121CBC0081E8C2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAB93C7F24121CBC0081E8C2 /* LaunchScreen.storyboard */; };
-		FAD1699B2414C425006D0C6B /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = FAD169972414C425006D0C6B /* spark.png */; };
-		FAD1699C2414C425006D0C6B /* Explode.scnp in Resources */ = {isa = PBXBuildFile; fileRef = FAD169982414C425006D0C6B /* Explode.scnp */; };
+		FAD169A0241510C5006D0C6B /* Crash.scnp in Resources */ = {isa = PBXBuildFile; fileRef = FAD1699F241510C5006D0C6B /* Crash.scnp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,8 +25,7 @@
 		FAB93C7D24121CBC0081E8C2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FAB93C8024121CBC0081E8C2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FAB93C8224121CBC0081E8C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FAD169972414C425006D0C6B /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
-		FAD169982414C425006D0C6B /* Explode.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = Explode.scnp; sourceTree = "<group>"; };
+		FAD1699F241510C5006D0C6B /* Crash.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = Crash.scnp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,8 +73,7 @@
 		FAD169962414C425006D0C6B /* Particles */ = {
 			isa = PBXGroup;
 			children = (
-				FAD169972414C425006D0C6B /* spark.png */,
-				FAD169982414C425006D0C6B /* Explode.scnp */,
+				FAD1699F241510C5006D0C6B /* Crash.scnp */,
 			);
 			path = Particles;
 			sourceTree = "<group>";
@@ -140,10 +137,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				FAB93C7724121CB80081E8C2 /* art.scnassets in Resources */,
-				FAD1699B2414C425006D0C6B /* spark.png in Resources */,
 				FAB93C8124121CBC0081E8C2 /* LaunchScreen.storyboard in Resources */,
+				FAD169A0241510C5006D0C6B /* Crash.scnp in Resources */,
 				FAB93C7E24121CBC0081E8C2 /* Assets.xcassets in Resources */,
-				FAD1699C2414C425006D0C6B /* Explode.scnp in Resources */,
 				FAB93C7C24121CB80081E8C2 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

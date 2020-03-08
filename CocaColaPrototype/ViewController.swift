@@ -235,9 +235,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
                 
             }
             
-            
-            let  explosion = SCNParticleSystem(named: "Explode", inDirectory: nil)
-            contact.nodeB.addParticleSystem(explosion!)
+            let  crash = SCNParticleSystem(named: "Crash", inDirectory: nil)
+            contact.nodeB.addParticleSystem(crash!)
         }
     }
     
@@ -248,5 +247,4 @@ struct CollisionCategory: OptionSet {
     
     static let missileCategory  = CollisionCategory(rawValue: 1 << 0)
     static let targetCategory = CollisionCategory(rawValue: 1 << 1)
-    static let otherCategory = CollisionCategory(rawValue: 1 << 2)
 }

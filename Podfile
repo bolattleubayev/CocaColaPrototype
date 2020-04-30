@@ -8,6 +8,8 @@ target 'CocaColaPrototype' do
   # Pods for CocaColaPrototype
   pod 'Firebase/Core'
   pod 'Firebase/Auth'
+  pod 'Firebase/Database' 
+  pod 'Firebase/Storage'
 
   # Pods for Facebook
   pod 'FBSDKLoginKit'

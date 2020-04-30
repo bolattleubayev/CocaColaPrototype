@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="MIu-6A-Obu">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Ahx-hZ-QIh">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
@@ -108,43 +108,7 @@
             </objects>
             <point key="canvasLocation" x="-530" y="29"/>
         </scene>
-        <!--User-->
-        <scene sceneID="UkZ-KN-wcm">
-            <objects>
-                <viewController id="c1K-1d-Wae" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Lj9-V7-FZ5">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cjd-PG-zUu">
-                                <rect key="frame" x="87" y="95" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CkZ-DO-dRJ">
-                                <rect key="frame" x="186" y="283" width="42" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="6Vd-Ro-rxK">
-                                <rect key="frame" x="132" y="365" width="150" height="2"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </progressView>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="E0q-jT-PuY"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="User" id="P3s-ru-hKr">
-                        <barButtonItem key="leftBarButtonItem" title="Log in" id="oYj-LN-Gcy"/>
-                        <barButtonItem key="rightBarButtonItem" title="Log out" id="D6w-69-n4O"/>
-                    </navigationItem>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Mx8-6f-Xm1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="379.71014492753625" y="748.66071428571422"/>
-        </scene>
-        <!--Settings-->
+        <!--Настройки-->
         <scene sceneID="RAa-FU-QeL">
             <objects>
                 <tableViewController id="MNC-yW-B3t" customClass="SettingsTableViewController" customModule="CocaColaPrototype" customModuleProvider="target" sceneMemberID="viewController">
@@ -165,19 +129,19 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="94M-51-VFX">
                                                     <rect key="frame" x="20" y="11" width="374" height="68"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select game mode" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jKe-Qh-V50">
-                                                            <rect key="frame" x="98.5" y="0.0" width="177.5" height="26.5"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Выберите режим" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jKe-Qh-V50">
+                                                            <rect key="frame" x="100.5" y="0.0" width="173" height="26.5"/>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Mh7-Sg-ROi">
-                                                            <rect key="frame" x="19.5" y="28.5" width="335" height="40.5"/>
+                                                            <rect key="frame" x="24" y="28.5" width="326" height="40.5"/>
                                                             <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <segments>
-                                                                <segment title="AR Game"/>
-                                                                <segment title="Location Game"/>
-                                                                <segment title="QR Scan"/>
+                                                                <segment title="AR игра"/>
+                                                                <segment title="Игра локаций"/>
+                                                                <segment title="QR скан"/>
                                                             </segments>
                                                             <color key="selectedSegmentTintColor" red="1" green="0.388425827" blue="0.28010615709999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <connections>
@@ -203,7 +167,7 @@
                             <outlet property="delegate" destination="MNC-yW-B3t" id="mOv-1P-IbG"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Settings" id="tbt-h8-ODe"/>
+                    <navigationItem key="navigationItem" title="Настройки" id="tbt-h8-ODe"/>
                     <connections>
                         <outlet property="gameModeSelector" destination="Mh7-Sg-ROi" id="KkU-x8-hYq"/>
                     </connections>
@@ -225,7 +189,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="BV1-FR-VrT" kind="relationship" relationship="viewControllers" id="VCh-FL-JrJ"/>
-                        <segue destination="hku-b3-bVB" kind="relationship" relationship="viewControllers" id="Cj3-uh-nQw"/>
+                        <segue destination="oh0-P5-ToK" kind="relationship" relationship="viewControllers" id="cFX-Re-JEG"/>
                         <segue destination="oed-dj-VpX" kind="relationship" relationship="viewControllers" id="jf3-0Q-Li8"/>
                     </connections>
                 </tabBarController>
@@ -233,30 +197,11 @@
             </objects>
             <point key="canvasLocation" x="-1672" y="749"/>
         </scene>
-        <!--User-->
-        <scene sceneID="VFN-LK-wx2">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hku-b3-bVB" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="User" image="person" catalog="system" id="yRd-1H-FjB"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="cDc-ko-snz">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="c1K-1d-Wae" kind="relationship" relationship="rootViewController" id="4rb-vF-IvT"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="l1y-rL-UrF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-530.43478260869574" y="748.66071428571422"/>
-        </scene>
-        <!--Settings-->
+        <!--Настройки-->
         <scene sceneID="5fM-f3-J8k">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="oed-dj-VpX" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Settings" image="gear" catalog="system" id="RME-BS-v42"/>
+                    <tabBarItem key="tabBarItem" title="Настройки" image="gear" catalog="system" id="RME-BS-v42"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="tan-FJ-jaz">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -287,13 +232,13 @@
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eyS-gv-K3n" customClass="LineButton" customModule="CocaColaPrototype" customModuleProvider="target">
-                                <rect key="frame" x="20" y="792" width="374" height="50"/>
+                                <rect key="frame" x="20" y="743" width="374" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" priority="750" constant="343" id="ZX6-F7-VKV"/>
                                     <constraint firstAttribute="height" constant="50" id="z19-U7-jtd"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="17"/>
-                                <state key="normal" title="CREATE ACCOUNT">
+                                <state key="normal" title="СОЗДАТЬ АККАУНТ">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -312,7 +257,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="suc-5M-6hB" customClass="LineButton" customModule="CocaColaPrototype" customModuleProvider="target">
-                                <rect key="frame" x="20" y="541" width="374" height="50"/>
+                                <rect key="frame" x="20" y="492" width="374" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="yxR-yT-oOs"/>
                                 </constraints>
@@ -340,7 +285,7 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="3mH-yx-LgN">
-                                <rect key="frame" x="20" y="621" width="374" height="107"/>
+                                <rect key="frame" x="20" y="572" width="374" height="107"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bp4-R1-JmZ" customClass="LineButton" customModule="CocaColaPrototype" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="50"/>
@@ -350,7 +295,7 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="17"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <state key="normal" title="SIGN IN WITH FACEBOOK">
+                                        <state key="normal" title="ВОЙТИ С FACEBOOK">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -373,7 +318,7 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="17"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <state key="normal" title="SIGN IN WITH GOOGLE">
+                                        <state key="normal" title="ВОЙТИ С GOOGLE">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -390,11 +335,11 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Welcome to  Coca-Cola Protoype" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LSG-Hr-HU5">
-                                <rect key="frame" x="29" y="104" width="302" height="100"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Добро пожаловать в  Coca-Cola Protoype" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LSG-Hr-HU5">
+                                <rect key="frame" x="29" y="104" width="322" height="129"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="137-NO-YSV"/>
-                                    <constraint firstAttribute="width" constant="302" id="XLk-66-AAs"/>
+                                    <constraint firstAttribute="height" constant="150" id="137-NO-YSV"/>
+                                    <constraint firstAttribute="width" constant="322" id="XLk-66-AAs"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="32"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -422,7 +367,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="3mH-yx-LgN" secondAttribute="trailing" id="kjA-wY-29e"/>
                             <constraint firstItem="zBe-uY-ieJ" firstAttribute="trailing" secondItem="l8S-sy-qCm" secondAttribute="trailing" id="nRv-sb-Ds8"/>
                             <constraint firstItem="zBe-uY-ieJ" firstAttribute="bottom" secondItem="eyS-gv-K3n" secondAttribute="bottom" constant="20" id="q9x-7K-Bt8"/>
-                            <constraint firstItem="suc-5M-6hB" firstAttribute="top" relation="greaterThanOrEqual" secondItem="LSG-Hr-HU5" secondAttribute="bottom" constant="20" id="xYR-Cn-57d"/>
+                            <constraint firstItem="suc-5M-6hB" firstAttribute="top" relation="greaterThanOrEqual" secondItem="LSG-Hr-HU5" secondAttribute="bottom" constant="30" id="xYR-Cn-57d"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="zBe-uY-ieJ"/>
                     </view>
@@ -430,9 +375,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qeO-gW-N3b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1365" y="-1578"/>
+            <point key="canvasLocation" x="1500.0000000000002" y="750.66964285714278"/>
         </scene>
-        <!--Log In-->
+        <!--Вход-->
         <scene sceneID="5xb-rU-7hB">
             <objects>
                 <viewController id="PvG-0I-SVF" customClass="LoginViewController" customModule="CocaColaPrototype" customModuleProvider="target" sceneMemberID="viewController">
@@ -467,7 +412,7 @@
                                                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                         <state key="normal" image="envelope" catalog="system"/>
                                                                     </button>
-                                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="ENTER YOUR EMAIL" textAlignment="natural" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="j5u-0k-eF9">
+                                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="ВВЕДИТЕ ВАШУ ПОЧТУ" textAlignment="natural" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="j5u-0k-eF9">
                                                                         <rect key="frame" x="37.5" y="0.0" width="316.5" height="25"/>
                                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="20"/>
@@ -504,7 +449,7 @@
                                                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                         <state key="normal" image="lock" catalog="system"/>
                                                                     </button>
-                                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="ENTER YOUR PASSWORD" textAlignment="natural" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="xnn-H1-1Nl">
+                                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="ВВЕДИТЕ ВАШ ПАРОЛЬ" textAlignment="natural" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="xnn-H1-1Nl">
                                                                         <rect key="frame" x="36" y="0.0" width="318" height="24"/>
                                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="20"/>
@@ -534,13 +479,13 @@
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0wo-HF-VbI" customClass="LineButton" customModule="CocaColaPrototype" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="121" width="354" height="50"/>
-                                                <color key="backgroundColor" red="0.18039215689999999" green="0.80000000000000004" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="backgroundColor" red="1" green="0.388425827" blue="0.28010615709999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="ggf-rZ-Fzd"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="17"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <state key="normal" title="LOG IN">
+                                                <state key="normal" title="ВОЙТИ">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <userDefinedRuntimeAttributes>
@@ -557,7 +502,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6CU-5J-YIA">
                                         <rect key="frame" x="0.0" y="201" width="354" height="38"/>
                                         <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="16"/>
-                                        <state key="normal" title="FORGOT PASSWORD?">
+                                        <state key="normal" title="ЗАБЫЛИ ПАРОЛЬ?">
                                             <color key="titleColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
@@ -586,8 +531,8 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="NTD-ji-hzo"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Log In" id="UHG-IB-gUS">
-                        <barButtonItem key="rightBarButtonItem" title="Cancel" id="PcF-qA-kxc">
+                    <navigationItem key="navigationItem" title="Вход" id="UHG-IB-gUS">
+                        <barButtonItem key="rightBarButtonItem" title="Отмена" id="PcF-qA-kxc">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <segue destination="DTD-16-rAP" kind="unwind" unwindAction="unwindtoWelcomeViewWithSegue:" id="m1K-21-UkL"/>
@@ -602,7 +547,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5v2-mQ-iIb" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="DTD-16-rAP" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="375" y="-1580"/>
+            <point key="canvasLocation" x="3241" y="749"/>
         </scene>
         <!--Sign Up View Controller-->
         <scene sceneID="TJW-Sg-Xur">
@@ -636,7 +581,7 @@
                                                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <state key="normal" image="person.crop.square" catalog="system"/>
                                                             </button>
-                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="NAME" textAlignment="natural" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="mUW-Ba-xj3">
+                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="ИМЯ" textAlignment="natural" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="mUW-Ba-xj3">
                                                                 <rect key="frame" x="34" y="0.0" width="320" height="26"/>
                                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="20"/>
@@ -710,7 +655,7 @@
                                                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <state key="normal" image="lock" catalog="system"/>
                                                             </button>
-                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="PASSWORD" textAlignment="natural" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="Kic-Cw-QXg">
+                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="ПАРОЛЬ" textAlignment="natural" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="Kic-Cw-QXg">
                                                                 <rect key="frame" x="36" y="0.0" width="318" height="24"/>
                                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="20"/>
@@ -740,13 +685,13 @@
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hYY-dI-MKO" customClass="LineButton" customModule="CocaColaPrototype" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="178" width="354" height="50"/>
-                                        <color key="backgroundColor" red="0.18039215689999999" green="0.80000000000000004" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="1" green="0.388425827" blue="0.28010615709999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="Jyt-3R-V1D"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="17"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <state key="normal" title="SIGN UP">
+                                        <state key="normal" title="ЗАРЕГЕСТРИРОВАТЬСЯ">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -780,7 +725,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="DMh-fV-KnP"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Sign Up" id="iAG-tE-i4u">
+                    <navigationItem key="navigationItem" title="Регистрация" id="iAG-tE-i4u">
                         <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="rdb-Mo-wK4">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
@@ -797,7 +742,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RpS-eO-KHY" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="dzl-Wc-QAv" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="375" y="-820"/>
+            <point key="canvasLocation" x="3241" y="1509"/>
         </scene>
         <!--Reset Password View Controller-->
         <scene sceneID="h6n-uc-4AP">
@@ -856,13 +801,13 @@
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oPW-6e-PxT" customClass="LineButton" customModule="CocaColaPrototype" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="95" width="354" height="50"/>
-                                        <color key="backgroundColor" red="0.18039215689999999" green="0.80000000000000004" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="1" green="0.388425827" blue="0.28010615709999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="Sz2-38-wxt"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="17"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <state key="normal" title="RESET MY PASSWORD">
+                                        <state key="normal" title="ИЗМЕНИТЬ ПАРОЛЬ">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -903,7 +848,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4SM-Lf-tnZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1217" y="-1580"/>
+            <point key="canvasLocation" x="4083" y="749"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Vue-ga-Sl8">
@@ -921,7 +866,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="axg-41-iJ1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-532" y="-1580"/>
+            <point key="canvasLocation" x="2333" y="749"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="NZt-v4-Nck">
@@ -939,17 +884,134 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DaY-Rx-ail" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-532" y="-820"/>
+            <point key="canvasLocation" x="2333" y="1509"/>
+        </scene>
+        <!--Profile View Controller-->
+        <scene sceneID="9Mv-jb-lvi">
+            <objects>
+                <viewController id="NhL-qJ-hal" userLabel="Profile View Controller" customClass="ProfileViewController" customModule="CocaColaPrototype" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ymo-tv-Y9d">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="borovoe" translatesAutoresizingMaskIntoConstraints="NO" id="e54-HC-shn" userLabel="Background Image View">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
+                            </imageView>
+                            <view clipsSubviews="YES" alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uxv-0s-9nx" userLabel="MaskView">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="vRb-ES-fSa">
+                                <rect key="frame" x="71" y="113" width="272" height="278.5"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="6y7-ay-oqo">
+                                        <rect key="frame" x="16" y="1.5" width="240" height="237"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="240" id="XOp-Xe-G5Q"/>
+                                            <constraint firstAttribute="height" constant="240" id="iX0-yJ-m5S"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="120"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="профиль" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O8I-oW-GZW">
+                                        <rect key="frame" x="94" y="255" width="84" height="23.5"/>
+                                        <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="20"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RJT-9q-0fI" customClass="LineButton" customModule="FirebaseDemo" customModuleProvider="target">
+                                <rect key="frame" x="30" y="720" width="354" height="50"/>
+                                <color key="backgroundColor" red="1" green="0.388425827" blue="0.28010615709999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="PmW-zu-Fag"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="17"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="ВЫЙТИ">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="25"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="logoutWithSender:" destination="NhL-qJ-hal" eventType="touchUpInside" id="64E-Gj-EzI"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="uxv-0s-9nx" firstAttribute="leading" secondItem="EJG-xi-sAn" secondAttribute="leading" id="21h-ty-5lX"/>
+                            <constraint firstItem="vRb-ES-fSa" firstAttribute="top" secondItem="EJG-xi-sAn" secondAttribute="top" constant="25" id="8xL-uW-wo5"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="RJT-9q-0fI" secondAttribute="trailing" constant="10" id="A7w-TU-6Ny"/>
+                            <constraint firstItem="RJT-9q-0fI" firstAttribute="leading" secondItem="Ymo-tv-Y9d" secondAttribute="leadingMargin" constant="10" id="CEl-e5-dqi"/>
+                            <constraint firstItem="EJG-xi-sAn" firstAttribute="bottom" secondItem="uxv-0s-9nx" secondAttribute="bottom" id="D40-hr-o8x"/>
+                            <constraint firstItem="e54-HC-shn" firstAttribute="top" secondItem="Ymo-tv-Y9d" secondAttribute="top" id="GF9-6R-siN"/>
+                            <constraint firstItem="EJG-xi-sAn" firstAttribute="trailing" secondItem="e54-HC-shn" secondAttribute="trailing" id="JvU-ro-Ghc"/>
+                            <constraint firstItem="e54-HC-shn" firstAttribute="leading" secondItem="EJG-xi-sAn" secondAttribute="leading" id="LUe-OU-Jsa"/>
+                            <constraint firstItem="EJG-xi-sAn" firstAttribute="trailing" secondItem="uxv-0s-9nx" secondAttribute="trailing" id="QKv-hK-EEg"/>
+                            <constraint firstItem="EJG-xi-sAn" firstAttribute="bottom" secondItem="e54-HC-shn" secondAttribute="bottom" id="Uy9-2F-Fqp"/>
+                            <constraint firstItem="vRb-ES-fSa" firstAttribute="leading" secondItem="Ymo-tv-Y9d" secondAttribute="leadingMargin" constant="51" id="XQc-sa-8iZ"/>
+                            <constraint firstItem="uxv-0s-9nx" firstAttribute="top" secondItem="Ymo-tv-Y9d" secondAttribute="top" id="Xgt-oy-p7c"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="vRb-ES-fSa" secondAttribute="trailing" constant="51" id="kJG-hK-rFf"/>
+                            <constraint firstItem="EJG-xi-sAn" firstAttribute="bottom" secondItem="RJT-9q-0fI" secondAttribute="bottom" constant="43" id="se2-Qa-euh"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="EJG-xi-sAn"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Профиль" id="1Vw-83-TuZ">
+                        <barButtonItem key="rightBarButtonItem" title="Войти" id="i60-gP-21S">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="closeWithSender:" destination="NhL-qJ-hal" id="ta9-4M-S4U"/>
+                                <segue destination="MIu-6A-Obu" kind="show" id="DRQ-0Q-CoN"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="nameLabel" destination="O8I-oW-GZW" id="Jxl-2g-Ygi"/>
+                        <outlet property="userPhotoView" destination="6y7-ay-oqo" id="JlL-7v-AkQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IL7-55-SFD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="374" y="749"/>
+        </scene>
+        <!--Профиль-->
+        <scene sceneID="aze-he-Oln">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="oh0-P5-ToK" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Профиль" image="person" catalog="system" id="8vT-tL-Njg"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="m8x-Rd-cOo">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="NhL-qJ-hal" kind="relationship" relationship="rootViewController" id="PIB-0Y-cle"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ln8-PM-Mc4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-536" y="749"/>
         </scene>
     </scenes>
     <resources>
         <image name="aim" width="502" height="502"/>
         <image name="arkit" catalog="system" width="128" height="128"/>
-        <image name="borovoe" width="595" height="842"/>
+        <image name="borovoe" width="3024" height="4032"/>
         <image name="envelope" catalog="system" width="128" height="93"/>
         <image name="gear" catalog="system" width="128" height="119"/>
         <image name="lock" catalog="system" width="128" height="128"/>
         <image name="person" catalog="system" width="128" height="117"/>
         <image name="person.crop.square" catalog="system" width="128" height="114"/>
+        <image name="person.fill" catalog="system" width="128" height="120"/>
     </resources>
 </document>

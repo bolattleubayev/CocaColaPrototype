@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6CBB8BF8D5B49DF17DF0F088 /* Pods_CocaColaPrototype.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02766D87BA7624B9E77D19B2 /* Pods_CocaColaPrototype.framework */; };
+		FA6D2928245B31910086070D /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6D2927245B31910086070D /* SettingsTableViewController.swift */; };
+		FA6D292A245B3D090086070D /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6D2929245B3D090086070D /* WelcomeViewController.swift */; };
+		FA6D292C245B3D250086070D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6D292B245B3D250086070D /* LoginViewController.swift */; };
+		FA6D292E245B3D5B0086070D /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6D292D245B3D5B0086070D /* ResetPasswordViewController.swift */; };
+		FA6D2930245B3D6F0086070D /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6D292F245B3D6E0086070D /* SignUpViewController.swift */; };
+		FA6D2933245B43C70086070D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA6D2932245B43C70086070D /* GoogleService-Info.plist */; };
 		FAB93C7524121CB80081E8C2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB93C7424121CB80081E8C2 /* AppDelegate.swift */; };
 		FAB93C7724121CB80081E8C2 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = FAB93C7624121CB80081E8C2 /* art.scnassets */; };
 		FAB93C7924121CB80081E8C2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB93C7824121CB80081E8C2 /* ViewController.swift */; };
@@ -17,6 +24,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		02766D87BA7624B9E77D19B2 /* Pods_CocaColaPrototype.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CocaColaPrototype.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		503F24B808940131DACE133E /* Pods-CocaColaPrototype.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CocaColaPrototype.release.xcconfig"; path = "Target Support Files/Pods-CocaColaPrototype/Pods-CocaColaPrototype.release.xcconfig"; sourceTree = "<group>"; };
+		66636F7DEBF58EF3C01FF31C /* Pods-CocaColaPrototype.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CocaColaPrototype.debug.xcconfig"; path = "Target Support Files/Pods-CocaColaPrototype/Pods-CocaColaPrototype.debug.xcconfig"; sourceTree = "<group>"; };
+		FA6D2927245B31910086070D /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		FA6D2929245B3D090086070D /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		FA6D292B245B3D250086070D /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		FA6D292D245B3D5B0086070D /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
+		FA6D292F245B3D6E0086070D /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		FA6D2932245B43C70086070D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FAB93C7124121CB80081E8C2 /* CocaColaPrototype.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CocaColaPrototype.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAB93C7424121CB80081E8C2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FAB93C7624121CB80081E8C2 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -33,17 +49,49 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6CBB8BF8D5B49DF17DF0F088 /* Pods_CocaColaPrototype.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		089C3EDFD98AA71C02820DEF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				02766D87BA7624B9E77D19B2 /* Pods_CocaColaPrototype.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7851E18653C9F33D3702523C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				66636F7DEBF58EF3C01FF31C /* Pods-CocaColaPrototype.debug.xcconfig */,
+				503F24B808940131DACE133E /* Pods-CocaColaPrototype.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		FA6D2931245B3DFD0086070D /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				FA6D2929245B3D090086070D /* WelcomeViewController.swift */,
+				FA6D292B245B3D250086070D /* LoginViewController.swift */,
+				FA6D292D245B3D5B0086070D /* ResetPasswordViewController.swift */,
+				FA6D292F245B3D6E0086070D /* SignUpViewController.swift */,
+			);
+			path = Firebase;
+			sourceTree = "<group>";
+		};
 		FAB93C6824121CB80081E8C2 = {
 			isa = PBXGroup;
 			children = (
 				FAB93C7324121CB80081E8C2 /* CocaColaPrototype */,
 				FAB93C7224121CB80081E8C2 /* Products */,
+				7851E18653C9F33D3702523C /* Pods */,
+				089C3EDFD98AA71C02820DEF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -66,6 +114,9 @@
 				FAB93C7D24121CBC0081E8C2 /* Assets.xcassets */,
 				FAB93C7F24121CBC0081E8C2 /* LaunchScreen.storyboard */,
 				FAB93C8224121CBC0081E8C2 /* Info.plist */,
+				FA6D2932245B43C70086070D /* GoogleService-Info.plist */,
+				FA6D2931245B3DFD0086070D /* Firebase */,
+				FA6D2927245B31910086070D /* SettingsTableViewController.swift */,
 			);
 			path = CocaColaPrototype;
 			sourceTree = "<group>";
@@ -85,9 +136,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FAB93C8524121CBC0081E8C2 /* Build configuration list for PBXNativeTarget "CocaColaPrototype" */;
 			buildPhases = (
+				C7201B5B1A6410AE419EF649 /* [CP] Check Pods Manifest.lock */,
 				FAB93C6D24121CB80081E8C2 /* Sources */,
 				FAB93C6E24121CB80081E8C2 /* Frameworks */,
 				FAB93C6F24121CB80081E8C2 /* Resources */,
+				6712D733CD8F2FC755796B83 /* [CP] Embed Pods Frameworks */,
+				9042B912F0C80F850DE787CC /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -141,10 +195,70 @@
 				FAD169A0241510C5006D0C6B /* Crash.scnp in Resources */,
 				FAB93C7E24121CBC0081E8C2 /* Assets.xcassets in Resources */,
 				FAB93C7C24121CB80081E8C2 /* Main.storyboard in Resources */,
+				FA6D2933245B43C70086070D /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6712D733CD8F2FC755796B83 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CocaColaPrototype/Pods-CocaColaPrototype-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CocaColaPrototype/Pods-CocaColaPrototype-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CocaColaPrototype/Pods-CocaColaPrototype-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9042B912F0C80F850DE787CC /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CocaColaPrototype/Pods-CocaColaPrototype-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CocaColaPrototype/Pods-CocaColaPrototype-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CocaColaPrototype/Pods-CocaColaPrototype-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C7201B5B1A6410AE419EF649 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CocaColaPrototype-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		FAB93C6D24121CB80081E8C2 /* Sources */ = {
@@ -152,7 +266,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				FAB93C7924121CB80081E8C2 /* ViewController.swift in Sources */,
+				FA6D2930245B3D6F0086070D /* SignUpViewController.swift in Sources */,
+				FA6D292A245B3D090086070D /* WelcomeViewController.swift in Sources */,
 				FAB93C7524121CB80081E8C2 /* AppDelegate.swift in Sources */,
+				FA6D292E245B3D5B0086070D /* ResetPasswordViewController.swift in Sources */,
+				FA6D292C245B3D250086070D /* LoginViewController.swift in Sources */,
+				FA6D2928245B31910086070D /* SettingsTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,6 +413,7 @@
 		};
 		FAB93C8624121CBC0081E8C2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 66636F7DEBF58EF3C01FF31C /* Pods-CocaColaPrototype.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -312,6 +432,7 @@
 		};
 		FAB93C8724121CBC0081E8C2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 503F24B808940131DACE133E /* Pods-CocaColaPrototype.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

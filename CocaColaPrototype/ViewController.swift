@@ -12,11 +12,14 @@ import ARKit
 
 class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDelegate {
     
+    let defaults = UserDefaults.standard
     private var isCan = true
     private var score = 0
     
     @IBOutlet weak var scoreLabel: UILabel!
     
+    @IBOutlet weak var aimImageView: UIImageView!
+    @IBOutlet weak var objectModeSelector: UISegmentedControl!
     @IBAction func changeObjectMode(_ sender: UISegmentedControl) {
         DispatchQueue.main.async {
           switch sender.selectedSegmentIndex {
@@ -177,6 +180,48 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         sceneView.scene.rootNode.addChildNode(objectNode)
     }
     
+    // QR
+    
+    func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
+        DispatchQueue.main.async {
+            self.scoreLabel.text = "Вы нашли специальный QR код +10 баллов на доске почета"
+            self.defaults.set(self.defaults.integer(forKey: "localScore") + 10, forKey: "localScore")
+        
+        }
+        print(defaults.integer(forKey: "localScore"))
+        guard let imageAnchor = anchor as? ARImageAnchor else {
+            return
+        }
+        
+        let referenceImage = imageAnchor.referenceImage
+        
+        //let plane = SCNPlane(width: referenceImage.physicalSize.width, height: referenceImage.physicalSize.height)
+        //plane.firstMaterial?.diffuse.contents = UIColor.blue
+        //let planeNode = SCNNode(geometry: plane)
+        //planeNode.eulerAngles.x = -Float.pi / 2
+        //planeNode.opacity = 0.5
+        
+        let pyramidScene = SCNScene(named: "art.scnassets/pyramid.scn")
+        
+        guard let pyramidNode = pyramidScene?.rootNode.childNode(withName: "parent", recursively: false) else {
+            return
+        }
+        
+        // Place the node in the correct position
+        pyramidNode.position = node.position
+        //pyramidNode.eulerAngles.x = .pi/2
+        // Add the node to the scene
+        //planeNode.addChildNode(pyramidNode)
+        
+        pyramidNode.runAction(.group([.fadeOpacity(to: 1.0, duration: 1.5), .rotateBy(x: 0, y: .pi * 2, z: 0, duration: 3)]))
+        
+        node.addChildNode(pyramidNode)
+        //planeNode.runAction(waitRemoveAction)
+    }
+    
+    var waitRemoveAction: SCNAction {
+        return .sequence([.wait(duration: 5.0), .fadeOut(duration: 2.0), .removeFromParentNode()])
+    }
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -185,25 +230,55 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         // Set the view's delegate
         sceneView.delegate = self
         
-        self.sceneView.scene.physicsWorld.contactDelegate = self
-        
-        addBins()
-        
-        // Enable default lighting
-        sceneView.autoenablesDefaultLighting = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        // Create a session configuration
-        let configuration = ARWorldTrackingConfiguration()
-        sceneView.session.run(configuration)
+        if defaults.integer(forKey: "gameMode") == 0 {
+            scoreLabel.text = "Счёт: \(self.score)"
+            // If Game mode
+            aimImageView.isHidden = false
+            objectModeSelector.isHidden = false
+            
+            self.sceneView.scene.physicsWorld.contactDelegate = self
+            
+            addBins()
+            
+            // Enable default lighting
+            sceneView.autoenablesDefaultLighting = true
+            
+            // Create a session configuration
+            let configuration = ARWorldTrackingConfiguration()
+            sceneView.session.run(configuration)
+        } else {
+            // QR mode
+            scoreLabel.text = "QR режим"
+            aimImageView.isHidden = true
+            objectModeSelector.isHidden = true
+            
+            let referenceImages = ARReferenceImage.referenceImages(inGroupNamed: "AR Resources", bundle: nil)!
+            
+            // Create a session configuration
+            let configuration = ARWorldTrackingConfiguration()
+            configuration.detectionImages = referenceImages
+            
+            // Enable default lighting
+            sceneView.autoenablesDefaultLighting = true
+            
+            // Run the view's session
+            sceneView.session.run(configuration, options: [])
+        }
+        
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
+        score = 0
+        for child in sceneView.scene.rootNode.childNodes {
+            child.removeFromParentNode()
+        }
         // Pause the view's session
         sceneView.session.pause()
     }

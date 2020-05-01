@@ -95,6 +95,8 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="AR" image="arkit" catalog="system" id="fEg-hy-wec"/>
                     <connections>
+                        <outlet property="aimImageView" destination="hdL-8f-hsF" id="0jA-sY-56B"/>
+                        <outlet property="objectModeSelector" destination="Jyg-FL-qvq" id="7E2-g9-Kkt"/>
                         <outlet property="sceneView" destination="BrB-h1-WRS" id="F0c-P8-FGr"/>
                         <outlet property="scoreLabel" destination="Tv7-Pw-TPE" id="ctI-cZ-YcK"/>
                     </connections>
@@ -136,11 +138,10 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Mh7-Sg-ROi">
-                                                            <rect key="frame" x="24" y="28.5" width="326" height="40.5"/>
+                                                            <rect key="frame" x="116.5" y="28.5" width="141" height="40.5"/>
                                                             <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <segments>
                                                                 <segment title="AR игра"/>
-                                                                <segment title="Игра локаций"/>
                                                                 <segment title="QR скан"/>
                                                             </segments>
                                                             <color key="selectedSegmentTintColor" red="1" green="0.388425827" blue="0.28010615709999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -174,7 +175,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PXO-bl-Goh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="379.71014492753625" y="1528.7946428571429"/>
+            <point key="canvasLocation" x="374" y="2165"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="TsJ-kR-6Vm">
@@ -190,12 +191,43 @@
                     <connections>
                         <segue destination="BV1-FR-VrT" kind="relationship" relationship="viewControllers" id="VCh-FL-JrJ"/>
                         <segue destination="oh0-P5-ToK" kind="relationship" relationship="viewControllers" id="cFX-Re-JEG"/>
+                        <segue destination="klW-8H-24Y" kind="relationship" relationship="viewControllers" id="agW-ga-C5d"/>
                         <segue destination="oed-dj-VpX" kind="relationship" relationship="viewControllers" id="jf3-0Q-Li8"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GUW-vc-k7r" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1672" y="749"/>
+        </scene>
+        <!--Лидеры-->
+        <scene sceneID="Fvz-QG-i3r">
+            <objects>
+                <tableViewController id="E41-re-ZVi" customClass="LeaderboardTableViewController" customModule="CocaColaPrototype" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Iw0-L9-xaE">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="90" id="23D-r1-lwQ">
+                                <rect key="frame" x="0.0" y="28" width="414" height="90"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="23D-r1-lwQ" id="kai-Ym-oKG">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="90"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="E41-re-ZVi" id="ubo-on-0Sg"/>
+                            <outlet property="delegate" destination="E41-re-ZVi" id="nXq-ep-bE5"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Лидеры" id="zF6-YH-ra5"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UkI-dD-cfK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="379.71014492753625" y="1451.7857142857142"/>
         </scene>
         <!--Настройки-->
         <scene sceneID="5fM-f3-J8k">
@@ -214,7 +246,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kiU-XI-G2s" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-530.43478260869574" y="1528.7946428571429"/>
+            <point key="canvasLocation" x="-536" y="2165"/>
         </scene>
         <!--Welcome View Controller-->
         <scene sceneID="NCq-W9-2nx">
@@ -263,7 +295,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="17"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <state key="normal" title=" SIGN IN WITH EMAIL" image="envelope" catalog="system">
+                                <state key="normal" title="ВОЙТИ ПО ПОЧТЕ" image="envelope" catalog="system">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -742,7 +774,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RpS-eO-KHY" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="dzl-Wc-QAv" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3241" y="1509"/>
+            <point key="canvasLocation" x="4150.7246376811599" y="1508.7053571428571"/>
         </scene>
         <!--Reset Password View Controller-->
         <scene sceneID="h6n-uc-4AP">
@@ -884,7 +916,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DaY-Rx-ail" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2333" y="1509"/>
+            <point key="canvasLocation" x="3242.0289855072465" y="1508.7053571428571"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="9Mv-jb-lvi">
@@ -902,7 +934,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="vRb-ES-fSa">
-                                <rect key="frame" x="71" y="113" width="272" height="278.5"/>
+                                <rect key="frame" x="71" y="113" width="272" height="332"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="6y7-ay-oqo">
                                         <rect key="frame" x="16" y="1.5" width="240" height="237"/>
@@ -923,9 +955,37 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="9xN-DZ-RXG">
+                                        <rect key="frame" x="0.0" y="293.5" width="272" height="38.5"/>
+                                        <subviews>
+                                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="hMr-P7-BUo">
+                                                <rect key="frame" x="0.0" y="0.0" width="272" height="4"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="3" id="9lD-0P-S1a"/>
+                                                </constraints>
+                                                <color key="progressTintColor" red="1" green="0.388425827" blue="0.28010615709999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="trackTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </progressView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="баллы" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wZl-my-SKK">
+                                                <rect key="frame" x="111" y="18" width="50" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="hMr-P7-BUo" firstAttribute="top" secondItem="9xN-DZ-RXG" secondAttribute="top" id="Vmf-Lx-sG5"/>
+                                            <constraint firstAttribute="trailing" secondItem="hMr-P7-BUo" secondAttribute="trailing" id="cWv-oY-bL6"/>
+                                            <constraint firstItem="hMr-P7-BUo" firstAttribute="leading" secondItem="9xN-DZ-RXG" secondAttribute="leading" id="m0y-sS-E92"/>
+                                        </constraints>
+                                    </stackView>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="9xN-DZ-RXG" secondAttribute="trailing" id="Hkb-np-nUQ"/>
+                                    <constraint firstItem="9xN-DZ-RXG" firstAttribute="leading" secondItem="vRb-ES-fSa" secondAttribute="leading" id="w9t-K8-Tjb"/>
+                                </constraints>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RJT-9q-0fI" customClass="LineButton" customModule="FirebaseDemo" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RJT-9q-0fI" customClass="LineButton" customModule="CocaColaPrototype" customModuleProvider="target">
                                 <rect key="frame" x="30" y="720" width="354" height="50"/>
                                 <color key="backgroundColor" red="1" green="0.388425827" blue="0.28010615709999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -976,6 +1036,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="nameLabel" destination="O8I-oW-GZW" id="Jxl-2g-Ygi"/>
+                        <outlet property="scoreBar" destination="hMr-P7-BUo" id="sOn-Pi-xTm"/>
+                        <outlet property="scoreLabel" destination="wZl-my-SKK" id="9gd-Vf-d8u"/>
                         <outlet property="userPhotoView" destination="6y7-ay-oqo" id="JlL-7v-AkQ"/>
                     </connections>
                 </viewController>
@@ -1002,6 +1064,25 @@
             </objects>
             <point key="canvasLocation" x="-536" y="749"/>
         </scene>
+        <!--Люди-->
+        <scene sceneID="R8v-L8-Wem">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="klW-8H-24Y" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Люди" image="person.3" catalog="system" id="Mp7-e8-fAC"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Qt5-WX-slZ">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="E41-re-ZVi" kind="relationship" relationship="rootViewController" id="r9J-g5-izC"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Vbb-Z1-Rhw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-530.43478260869574" y="1451.7857142857142"/>
+        </scene>
     </scenes>
     <resources>
         <image name="aim" width="502" height="502"/>
@@ -1011,6 +1092,7 @@
         <image name="gear" catalog="system" width="128" height="119"/>
         <image name="lock" catalog="system" width="128" height="128"/>
         <image name="person" catalog="system" width="128" height="117"/>
+        <image name="person.3" catalog="system" width="128" height="62"/>
         <image name="person.crop.square" catalog="system" width="128" height="114"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
     </resources>

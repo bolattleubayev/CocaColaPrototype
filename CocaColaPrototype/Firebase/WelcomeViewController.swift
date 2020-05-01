@@ -11,8 +11,20 @@ class WelcomeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.title = ""
+        
+        
+        self.title = "Вход"
+        
+        // Modifying the Navigation Bar
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.isTranslucent = true
+        navigationController?.view.backgroundColor = .clear
+        navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.shadowImage = UIImage()
+        if let customFont = UIFont(name: "Avenir", size: 25.0) {
+            navigationController?.navigationBar.titleTextAttributes = [ NSAttributedString.Key.foregroundColor: UIColor(red: 240.0 / 255.0, green: 240.0 / 255.0, blue: 240.0 / 255.0, alpha: 1.0), NSAttributedString.Key.font: customFont]
+        }
         
         // Google Sign In delegates
         GIDSignIn.sharedInstance().delegate = self

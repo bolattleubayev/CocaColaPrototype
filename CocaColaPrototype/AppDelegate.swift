@@ -18,9 +18,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        // Set up the style and color of the common UI elements
-        customizeUIStyle()
-        
         // Configure Firebase
         FirebaseApp.configure()
         //Database.database().isPersistenceEnabled = true
@@ -70,13 +67,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return handled
     }
 
-}
-
-
-extension AppDelegate {
-    func customizeUIStyle() {
-        
-        // Customize Navigation bar items
-        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UINavigationBar.self]).setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Avenir", size: 16)!, NSAttributedString.Key.foregroundColor: UIColor.white], for: UIControl.State.normal)
-    }
 }

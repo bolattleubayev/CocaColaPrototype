@@ -20,6 +20,18 @@ class SettingsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Modifying the Navigation Bar
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.isTranslucent = true
+        navigationController?.view.backgroundColor = .clear
+        navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.shadowImage = UIImage()
+        if let customFont = UIFont(name: "Avenir", size: 25.0) {
+            navigationController?.navigationBar.titleTextAttributes = [ NSAttributedString.Key.foregroundColor: UIColor.red, NSAttributedString.Key.font: customFont]
+        }
+        
         gameModeSelector.selectedSegmentIndex = defaults.integer(forKey: "gameMode")
     }
 }

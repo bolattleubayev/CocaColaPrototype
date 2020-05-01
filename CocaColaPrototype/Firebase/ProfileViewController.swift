@@ -7,16 +7,20 @@ import Firebase
 import GoogleSignIn
 import FirebaseDatabase
 import FirebaseStorage
+import MapKit
+import CoreLocation
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: UIViewController, CLLocationManagerDelegate {
+    let defaults = UserDefaults.standard
+    let locationManager = CLLocationManager()
     
-    
-//
-//    let POST_DB_REF: DatabaseReference = Database.database().reference().child("posts")
-//
     @IBOutlet var nameLabel: UILabel!
     
     @IBOutlet weak var userPhotoView: UIImageView!
+    
+    @IBOutlet weak var scoreBar: UIProgressView!
+    
+    @IBOutlet weak var scoreLabel: UILabel!
     
     @IBAction func logout(sender: UIButton) {
         do {
@@ -55,26 +59,64 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        if let currentUser = Auth.auth().currentUser {
-            nameLabel.text = currentUser.displayName
-            
-            let BASE_DB_REF: DatabaseReference = Database.database().reference()
-            let POST_DB_REF: DatabaseReference = Database.database().reference().child("posts")
-            // Setting Data
-            POST_DB_REF.setValue(10)
-            
-            // Retrieving data
-            BASE_DB_REF.observeSingleEvent(of: .value, with: { (snapshot) in
-                for item in snapshot.children.allObjects as! [DataSnapshot] {
-                    print(item)
-                    let postInfo = item.value as? Int ?? 0
-                    print(postInfo)
-                }
-            })
+        // Modifying the Navigation Bar
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.isTranslucent = true
+        navigationController?.view.backgroundColor = .clear
+        navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.shadowImage = UIImage()
+        if let customFont = UIFont(name: "Avenir", size: 25.0) {
+            navigationController?.navigationBar.titleTextAttributes = [ NSAttributedString.Key.foregroundColor: UIColor(red: 240.0 / 255.0, green: 240.0 / 255.0, blue: 240.0 / 255.0, alpha: 1.0), NSAttributedString.Key.font: customFont]
         }
         
+        //Location
+        
+        locationManager.delegate = self;
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        //locationManager.startUpdatingLocation()
+        
+        
+//        if let currentUser = Auth.auth().currentUser {
+//            nameLabel.text = currentUser.displayName
+//
+//
+//
+////            // Retrieving data
+////            BASE_DB_REF.observeSingleEvent(of: .value, with: { (snapshot) in
+////                for items in snapshot.children.allObjects as! [DataSnapshot] {
+////                    let innerItems = items.value as? [String: Any] ?? [:]
+////                    for item in innerItems {
+////                        print(item.value)
+////                        let postInfo = item.value as? [String: Any] ?? [:]
+////                        print("\(postInfo["user"]) : \(postInfo["score"])")
+////                    }
+////
+////
+////                }
+////            })
+//        }
+        
         if let user = GIDSignIn.sharedInstance()!.currentUser {
+            nameLabel.text = "\(user.profile.givenName!) \(user.profile.familyName!)"
+            
+            // Setting Data
+            guard let displayName = Auth.auth().currentUser?.displayName else {
+                return
+            }
+            let POST_DB_REF: DatabaseReference = Database.database().reference().child("posts").child(displayName)
+            
+            let post: [String : Any] = ["user" : displayName,
+                                        "score": defaults.integer(forKey: "localScore"),
+                                        "longitude":locationManager.location?.coordinate.longitude,
+            "latitude":locationManager.location?.coordinate.latitude,]
+            
+            
+            scoreBar.setProgress(Float(defaults.integer(forKey: "localScore")) / 1000.0, animated: true)
+            scoreLabel.text = "Счёт: \(defaults.integer(forKey: "localScore"))/1000"
+            POST_DB_REF.setValue(post)
+            
             if user.profile.hasImage {
                 userPhotoView.image = UIImage()
                 
@@ -100,6 +142,12 @@ class ProfileViewController: UIViewController {
     
     @IBAction func close(sender: AnyObject) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    //Location
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
+        print("locations = \(locValue.latitude) \(locValue.longitude)")
     }
     /*
     // MARK: - Navigation

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		6CBB8BF8D5B49DF17DF0F088 /* Pods_CocaColaPrototype.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02766D87BA7624B9E77D19B2 /* Pods_CocaColaPrototype.framework */; };
 		FA06C313245B6A2C0027DD17 /* LeaderboardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA06C312245B6A2C0027DD17 /* LeaderboardTableViewController.swift */; };
+		FA2BB29B247E348A002437A8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA2BB299247E348A002437A8 /* GoogleService-Info.plist */; };
 		FA6D2928245B31910086070D /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6D2927245B31910086070D /* SettingsTableViewController.swift */; };
 		FA6D292A245B3D090086070D /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6D2929245B3D090086070D /* WelcomeViewController.swift */; };
 		FA6D292C245B3D250086070D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6D292B245B3D250086070D /* LoginViewController.swift */; };
@@ -29,6 +30,8 @@
 		503F24B808940131DACE133E /* Pods-CocaColaPrototype.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CocaColaPrototype.release.xcconfig"; path = "Target Support Files/Pods-CocaColaPrototype/Pods-CocaColaPrototype.release.xcconfig"; sourceTree = "<group>"; };
 		66636F7DEBF58EF3C01FF31C /* Pods-CocaColaPrototype.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CocaColaPrototype.debug.xcconfig"; path = "Target Support Files/Pods-CocaColaPrototype/Pods-CocaColaPrototype.debug.xcconfig"; sourceTree = "<group>"; };
 		FA06C312245B6A2C0027DD17 /* LeaderboardTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardTableViewController.swift; sourceTree = "<group>"; };
+		FA2BB299247E348A002437A8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		FA2BB29A247E348A002437A8 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FA6D2927245B31910086070D /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		FA6D2929245B3D090086070D /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		FA6D292B245B3D250086070D /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -42,7 +45,6 @@
 		FAB93C7B24121CB80081E8C2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FAB93C7D24121CBC0081E8C2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FAB93C8024121CBC0081E8C2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		FAB93C8224121CBC0081E8C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FAD1699F241510C5006D0C6B /* Crash.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = Crash.scnp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -113,9 +115,10 @@
 				FAB93C7424121CB80081E8C2 /* AppDelegate.swift */,
 				FAB93C7824121CB80081E8C2 /* ViewController.swift */,
 				FAB93C7A24121CB80081E8C2 /* Main.storyboard */,
+				FA2BB299247E348A002437A8 /* GoogleService-Info.plist */,
+				FA2BB29A247E348A002437A8 /* Info.plist */,
 				FAB93C7D24121CBC0081E8C2 /* Assets.xcassets */,
 				FAB93C7F24121CBC0081E8C2 /* LaunchScreen.storyboard */,
-				FAB93C8224121CBC0081E8C2 /* Info.plist */,
 				FA6D2931245B3DFD0086070D /* Firebase */,
 				FA6D2927245B31910086070D /* SettingsTableViewController.swift */,
 				FA06C312245B6A2C0027DD17 /* LeaderboardTableViewController.swift */,
@@ -197,6 +200,7 @@
 				FAD169A0241510C5006D0C6B /* Crash.scnp in Resources */,
 				FAB93C7E24121CBC0081E8C2 /* Assets.xcassets in Resources */,
 				FAB93C7C24121CB80081E8C2 /* Main.storyboard in Resources */,
+				FA2BB29B247E348A002437A8 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
